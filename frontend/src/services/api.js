@@ -30,7 +30,6 @@ export const getTodos = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   });
-
   return response.data;
 };
 
@@ -49,10 +48,24 @@ export const addTodo = async (title, token) => {
   return response.data;
 };
 
+
 // Delete Todo
 export const deleteTodo = async (id, token) => {
   const response = await axios.delete(
     `${TODO_URL}/delete/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  return response.data;
+};
+
+export const completeTodoApi = async (id, token) => {
+  const response = await axios.patch(
+    `${TODO_URL}/${id}/complete`,
+    {},
     {
       headers: {
         Authorization: `Bearer ${token}`,

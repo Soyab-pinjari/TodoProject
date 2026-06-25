@@ -10,12 +10,22 @@ const app = express();
 
 connect();
 
-app.use(cors());          
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "https://todo-project-psi-five.vercel.app/",
+    credentials: true,
+  })
+);        
 app.use(express.json());  
 app.use("/user" , userRoutes);
 app.use(auth);
 app.use("/todo", todoRoute);
 
-app.listen(3000, () => {
-    console.log("Server run on 3000");
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });

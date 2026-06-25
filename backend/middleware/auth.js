@@ -10,7 +10,7 @@ const auth = async(req,res,next)=>{
 
               const decoded = jwt.verify(token,process.env.JWT_SECRATE_KEY);
                 console.log(decoded, "login successfully");
-                console.log(decoded);
+               
                 req.user = decoded;
                 next();
             }else{

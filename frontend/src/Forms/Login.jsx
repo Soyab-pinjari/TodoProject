@@ -3,28 +3,29 @@ import { Link } from 'react-router';
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/api";
 function Login() {
-  const [username, setUserName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-const navigate = useNavigate();
-  const handleSubmit = async(e) => {
+  const navigate = useNavigate();
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await loginUser({
-          username,
-      password,
+        email,
+        password,
       })
-       localStorage.setItem("token", data.token);
-       console.log(localStorage.getItem("token"));
-       console.log("login successfull");
-       console.log(data.token);
-       navigate("/todo");
+      localStorage.setItem("token", data.token);
+      setEmail('');
+      setPassword('');
+      navigate("/todo");
     } catch (error) {
-       alert(
-      error.response?.data?.message ||
-      "Login Failed"
-    );
+      alert(
+        error.response?.data?.message ||
+        "Login Failed"
+      );
     }
-    // axios.post('/login', { username, password })
+   
   };
 
   return (
@@ -34,16 +35,16 @@ const navigate = useNavigate();
         <h1 className="text-3xl font-bold text-center mb-6">
           Login
         </h1>
-
         <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-4"
         >
           <input
             type="text"
-            placeholder="Enter Username"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
+
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="px-4 py-2 bg-white text-black rounded-lg outline-none border-2"
           />
 

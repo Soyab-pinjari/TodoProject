@@ -2,32 +2,32 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { registerUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
-const Registration = () => {
+
+
+  const Registration = () => {
+
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
-
   const [password, setPassword] = useState('');
+  const [msg,setMsg] = useState('');
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
   const handleSubmit = async(e) => {
     e.preventDefault();
-      console.log("1");
     try {
-        console.log("2");
       const data = await registerUser({
       username,
       email,
       password,
     });
-        // alert(data.message);
-        alert("registration successfully");
-       
+    setMsg(data.message);
+
     navigate("/login");
     } catch (error) {
-        console.log(error.response?.data);
-  console.log(error.message);
-   console.log(error);
-
+        
+console.log(error.response.data);
+    setMsg(error.response.data.message);
+    console.log(error.response.data.message);
 }
 
   };
@@ -36,9 +36,11 @@ const navigate = useNavigate();
     <div className="min-h-screen flex items-center justify-center bg-slate-900 text-white">
       <div className="w-[500px] bg-slate-800 rounded-xl p-6 shadow-lg">
 
-        <h1 className="text-3xl font-bold text-center mb-6">
+        <h1 className="text-3xl font-bold text-center mb-10">
           Register
         </h1>
+
+        <h1 className='text-1xl font-semibold mb-6'>{msg}</h1>
 
         <form
           className="flex flex-col gap-4"

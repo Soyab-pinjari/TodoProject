@@ -9,7 +9,6 @@ export const registerUser = async (userData) => {
     `${AUTH_URL}/register`,
     userData
   );
-
   return response.data;
 };
 
@@ -19,9 +18,9 @@ export const loginUser = async (userData) => {
     `${AUTH_URL}/login`,
     userData
   );
-
   return response.data;
 };
+
 
 // Get Todos
 export const getTodos = async (token) => {

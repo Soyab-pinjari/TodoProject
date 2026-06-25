@@ -14,7 +14,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "https://todo-project-psi-five.vercel.app/",
+    origin: "todo-project-psi-five.vercel.app",
     credentials: true,
   })
 );        

@@ -1,12 +1,14 @@
 import axios from "axios";
+const BASE_URL = import.meta.env.VITE_API_URL;
+const TODO_URL = `${BASE_URL}/todo`;
 
-const AUTH_URL = "http://localhost:3000/user";
-const TODO_URL = "http://localhost:3000/todo";
+// const AUTH_URL = "https://todoproject-backend-z1z8.onrender.com/user";
+// const TODO_URL = "https://todoproject-backend-z1z8.onrender.com/todo";
 
-// Register User
+
 export const registerUser = async (userData) => {
   const response = await axios.post(
-    `${AUTH_URL}/register`,
+    `${BASE_URL}/user/register`,
     userData
   );
   return response.data;
@@ -15,7 +17,7 @@ export const registerUser = async (userData) => {
 // Login User
 export const loginUser = async (userData) => {
   const response = await axios.post(
-    `${AUTH_URL}/login`,
+    `${BASE_URL}/user/login`,
     userData
   );
   return response.data;

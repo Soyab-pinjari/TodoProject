@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import{addTodo,getTodos,completeTodoApi} from "../services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash,faPen,faCircleCheck ,faUserCircle ,  faTimes,
-
   faCheck, } from "@fortawesome/free-solid-svg-icons";
-import { jwtDecode } from "jwt-decode";
 
+import { jwtDecode } from "jwt-decode";
+import { BASE_URL } from "../Config";
 function Todo() {
   const [title, setTitle] = useState("");
   const [todos, setTodos] = useState([]);
@@ -73,7 +73,7 @@ function Todo() {
       if (!newTitle) return;
 
       await axios.put(
-        `http://localhost:3000/todo/${id}`,
+        `${BASE_URL}/todo/${id}`,
         { title: newTitle },
         {
           headers: {
@@ -100,7 +100,7 @@ function Todo() {
       const token = checkAuth();
 
       await axios.delete(
-        `http://localhost:3000/todo/${id}`,
+        `${BASE_URL}/todo/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
